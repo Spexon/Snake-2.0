@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,7 +43,7 @@ public class PreGameController implements Initializable {
     }
 
     /**
-     * Creates new scene and changes current scene to new one.
+     * Creates a new scene and changes current scene to new one.
      * (Code used from: https://www.youtube.com/watch?v=rMQrXSYHl8w)
      */
     @FXML
@@ -59,7 +60,7 @@ public class PreGameController implements Initializable {
             curStage.setScene(new Scene(secondView, 1200, 800));
             curStage.show();
 
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(PreGameController.class.getName()).log(Level.SEVERE, "Scene exception", ex);
         }
     }

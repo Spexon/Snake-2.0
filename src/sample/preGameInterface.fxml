@@ -2,48 +2,103 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PreGameController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@PGCStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PreGameController">
    <children>
-      <Label layoutX="132.0" layoutY="23.0" text="Welcome To Snake">
+      <Button focusTraversable="false" layoutX="77.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#easyDifficulty" prefHeight="50.0" prefWidth="110.0" text="Easy">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Button focusTraversable="false" layoutX="246.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#mediumDifficulty" prefHeight="50.0" prefWidth="110.0" text="Normal">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Button focusTraversable="false" layoutX="414.0" layoutY="194.0" mnemonicParsing="false" onMouseClicked="#hardDifficulty" prefHeight="50.0" prefWidth="110.0" text="Hard">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <light>
+                  <Light.Distant />
+               </light>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </Button>
+      <Button fx:id="beginBtn" focusTraversable="false" layoutX="246.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#loadNextScene" prefHeight="50.0" prefWidth="110.0" text="Begin" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Label layoutX="132.0" layoutY="33.0" text="Welcome To Snake">
          <font>
             <Font size="40.0" />
          </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
       </Label>
-      <Button onMouseClicked="#easyDifficulty" layoutX="77.0" layoutY="194.0"
-              mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" text="Easy">
-         <font>
-            <Font size="18.0" />
-         </font>
-
-      </Button>
-      <Label layoutX="217.0" layoutY="107.0" text="Select Difficulty">
+      <Label layoutX="219.0" layoutY="107.0" text="Select Difficulty">
          <font>
             <Font size="24.0" />
          </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
       </Label>
-      <Button onMouseClicked="#mediumDifficulty" layoutX="246.0" layoutY="194.0"
-              mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" text="Normal">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button onMouseClicked="#hardDifficulty" layoutX="414.0" layoutY="194.0"
-              mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" text="Hard">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="beginBtn" onMouseClicked="#loadNextScene" visible="false"  layoutX="246.0" layoutY="306.0"
-              mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" text="Begin">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Separator layoutY="163.0" prefHeight="4.0" prefWidth="600.0" />
-      <Separator layoutY="274.0" prefHeight="4.0" prefWidth="600.0" />
    </children>
 </AnchorPane>
