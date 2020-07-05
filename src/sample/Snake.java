@@ -14,6 +14,5 @@ public class Snake {
 
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
-        System.out.println(difficulty);
     }
 }
