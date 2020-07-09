@@ -67,7 +67,6 @@ public class PreGameController implements Initializable {
             curStage.setY((screenBounds.getHeight() - 1050) / 2);
 
             curStage.setTitle("Snake");
-            curStage.setScene(new Scene(secondView, 1920, 1080));
             curStage.show();
 
         } catch (IOException ex) {
