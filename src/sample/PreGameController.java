@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PreGameController implements Initializable {
+public class PreGameController {
 
     public Button beginBtn;
     public static Snake level = new Snake();
@@ -72,13 +72,5 @@ public class PreGameController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(PreGameController.class.getName()).log(Level.SEVERE, "Scene exception", ex);
         }
-    }
-
-    /**
-     * Sets up buttons and other objects as program starts. Everything done here should be possible to do in FXML
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

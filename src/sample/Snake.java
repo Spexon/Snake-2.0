@@ -7,9 +7,9 @@ public class Snake {
 
     private int difficulty; // Easy = 1, Normal = 2, Hard = 3
     private int speed;
-    private int xPos = 77;
-    private int yPos = 194;
-    private String directionFacing = "right";
+    private double xPos = 77;
+    private double yPos = 194;
+    private String directionFacing = "RIGHT";
 
 
     /**
@@ -17,22 +17,17 @@ public class Snake {
      */
     public void xyMovement() {
 
-        if (directionFacing.equals("right")) {
+        if (directionFacing.equals("RIGHT")) {
             xPos++;
-        } else if (directionFacing.equals("left")) {
+        } else if (directionFacing.equals("LEFT")) {
             xPos--;
-        } else if (directionFacing.equals("up")) {
+        } else if (directionFacing.equals("UP")) {
             yPos--;
-        } else if (directionFacing.equals("down")) {
+        } else if (directionFacing.equals("DOWN")) {
             yPos++;
         } else {
             System.out.println("Error in xyMovement!");
         }
-    }
-
-    public void changeDirection(String keyboard) {
-
-        //if (keyboard = );
     }
 
     /**
@@ -82,19 +77,19 @@ public class Snake {
         this.directionFacing = directionFacing;
     }
 
-    public int getxPos() {
+    public double getxPos() {
         return xPos;
     }
 
-    public void setxPos(int xPos) {
+    public void setxPos(double xPos) {
         this.xPos = xPos;
     }
 
-    public int getyPos() {
+    public double getyPos() {
         return yPos;
     }
 
-    public void setyPos(int yPos) {
+    public void setyPos(double yPos) {
         this.yPos = yPos;
     }
 }

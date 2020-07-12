@@ -2,52 +2,70 @@ package sample;
 
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
+import javafx.animation.AnimationTimer;
 import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class GameController implements Initializable {
 
-
     public Label showDifficulty;
     public ImageView snakeHead;
     private boolean notDead = true;
 
 
-    public void handleSnakeMovement() {
+    /**
+     * Animates the snake so that it moves continuously.
+     * Code idea retrieved from: http://wecode4fun.blogspot.com/2015/01/the-game-loop-game-we-create-is-2d.html
+     */
+    private void gameLoop() {
 
-        while (notDead) {
-            notDead = PreGameController.level.boundaryControl();
-            snakeHead.setX(PreGameController.level.getxPos());
-            snakeHead.setY(PreGameController.level.getyPos());
-            PreGameController.level.xyMovement(); //I need to update the snake image realtime with the application
-
-        }
-
-    }
-
-    public void handleDirectionChange(KeyEvent actionEvent) {
-        System.out.println(actionEvent);
-        PreGameController.level.boundaryControl();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Task<Snake> task = new Task() {
+        // game loop
+        AnimationTimer timer = new AnimationTimer() {
             @Override
-            protected Object call() throws Exception {
-                return null;
+            public void handle(long l) {
+
+
+                if (PreGameController.level.getDirectionFacing().equals("RIGHT")) {
+                    snakeHead.setX(PreGameController.level.getxPos() + 2);
+                } else if (PreGameController.level.getDirectionFacing().equals("LEFT")) {
+                    snakeHead.setX(PreGameController.level.getxPos() - 2);
+                } else if (PreGameController.level.getDirectionFacing().equals("UP")) {
+                    snakeHead.setY(PreGameController.level.getyPos() + 2);
+                } else if (PreGameController.level.getDirectionFacing().equals("DOWN")) {
+                    snakeHead.setY(PreGameController.level.getyPos() - 2);
+                } else {
+                    System.out.println("Error in xyMovement!");
+                }
+                PreGameController.level.boundaryControl();
             }
         };
-        Thread thread = new Thread(task);
-        thread.start();
+        timer.start();
+    }
+
+    public void handleSnakeMovement() {
+
+
+    }
+
+    public void handleDirectionChange(KeyEvent key) {
+
+        PreGameController.level.setDirectionFacing(key.getCode().toString());
+
+    }
+
+    /**
+     * Sets up difficulty and other objects as program starts. Everything done here should be possible to do in FXML
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
         showDifficulty.setText("Difficulty: " + PreGameController.level.getDifficulty());
-        handleSnakeMovement();
+        gameLoop();
     }
 }
