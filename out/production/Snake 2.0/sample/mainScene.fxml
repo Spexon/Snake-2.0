@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@MSStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
+   <children>
+      <Label fx:id="showDifficulty" layoutX="1762.0" layoutY="27.0" text="Difficulty: " textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="50.0" focusTraversable="true" layoutX="149.0" layoutY="51.0" onKeyPressed="#handleDirectionChange" pickOnBounds="true">
+         <image>
+            <Image url="@Snake_Head.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

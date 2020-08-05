@@ -1,0 +1,23 @@
+.root {
+    -fx-background-image: url("mahogany.png");
+}
+
+.label {
+    -fx-text-fill: chocolate;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: chocolate;
+    -fx-text-fill: darkred;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(chocolate, orangered);
+}
+
+
+
