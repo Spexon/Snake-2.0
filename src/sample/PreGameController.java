@@ -2,7 +2,6 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,19 +9,16 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PreGameController {
 
-    public Button beginBtn;
-    public static Snake level = new Snake();
-    @FXML
-    private AnchorPane anchorPane;
+
+    public static Snake snake = new Snake();
+    @FXML private Button beginBtn;
+    @FXML private AnchorPane anchorPane;
 
     /**
      * Difficulty selectors, tried to make this one method, but couldn't understand how to differentiate the buttons.
@@ -30,19 +26,19 @@ public class PreGameController {
      */
     public void easyDifficulty() {
         //Snake level = new Snake();
-        level.setDifficulty(1);
+        snake.setDifficulty(1);
         beginBtn.setVisible(true);
     }
 
     public void mediumDifficulty() {
         //Snake level = new Snake();
-        level.setDifficulty(2);
+        snake.setDifficulty(2);
         beginBtn.setVisible(true);
     }
 
     public void hardDifficulty() {
         //Snake level = new Snake();
-        level.setDifficulty(3);
+        snake.setDifficulty(3);
         beginBtn.setVisible(true);
     }
 
@@ -65,7 +61,12 @@ public class PreGameController {
             Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
             curStage.setX((screenBounds.getWidth() - 1930) / 2);
             curStage.setY((screenBounds.getHeight() - 1050) / 2);
+            //curStage.setX(screenBounds.getWidth() - curStage.getWidth() / 2);
+            //curStage.setY(screenBounds.getHeight() - curStage.getHeight() / 2);
 
+            curStage.setFullScreenExitHint("");
+            curStage.setMaximized(true);
+            curStage.setFullScreen(true);
             curStage.setTitle("Snake");
             curStage.show();
 

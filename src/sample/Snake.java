@@ -1,32 +1,38 @@
 package sample;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javax.swing.plaf.DimensionUIResource;
-
 public class Snake {
 
     private int difficulty; // Easy = 1, Normal = 2, Hard = 3
-    private int speed = difficulty * 2;
-    private double xPos = 300;
-    private double yPos = 200;
+    private double speed;
+    private double xPos = 200;
+    private double yPos = 150;
     private String directionFacing = "RIGHT";
-
+    private boolean canMoveRight = true;
+    private boolean canMoveLeft = false;
+    private boolean canMoveUp = true;
+    private boolean canMoveDown = true;
 
     /**
-     * Continuously moves the snake in the desired direction depending on keyboard input
+     * Continuously moves the snake in the desired direction depending on keyboard input, speed based on difficulty
      */
     public void xyMovement() {
-
+        speed = difficulty * 2.0;
         if (directionFacing.equals("RIGHT")) {
-            xPos += 2;
+            xPos += speed;
         } else if (directionFacing.equals("LEFT")) {
-            xPos -= 2;
+            xPos -= speed;
         } else if (directionFacing.equals("UP")) {
-            yPos -= 2;
+            yPos -= speed;
         } else if (directionFacing.equals("DOWN")) {
-            yPos += 2;
+            yPos += speed;
         }
+    }
+
+    /**
+     * Controls the part that extends behind the snake
+     */
+    public void snakeBody() {
+
     }
 
     /**
@@ -37,28 +43,27 @@ public class Snake {
 
         boolean notDead = true;
         // Left Boundary
-        if (xPos < 0) {
-            System.out.println("Out of bounds LEFT");
+        if (xPos < 100) {
             notDead = false;
         }
         // Right Boundary
-        else if (xPos > 1920) {
-            System.out.println("Out of bounds RIGHT");
+        else if (xPos > 1750) {
             notDead = false;
         }
         // Top Boundary
-        else if (yPos < 0) {
-            System.out.println("Out of bounds TOP");
+        else if (yPos < 100) {
             notDead = false;
         }
         // Bottom Boundary
-        else if (yPos > 1080) {
-            System.out.println("Out of bounds BOTTOM");
+        else if (yPos > 950) {
             notDead = false;
         }
         return notDead;
     }
 
+    /**
+     * Getters and setters below
+     */
 
     public int getDifficulty() {
         return difficulty;
@@ -72,18 +77,47 @@ public class Snake {
         return directionFacing;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
+    /**
+     * Ensures that only keypad values are accepted and that the snake cannot move into itself.
+     * @param directionFacing the direction that the snake is being requested to face.
+     */
     public void setDirectionFacing(String directionFacing) {
-        if(directionFacing.equals("RIGHT") || directionFacing.equals("LEFT") || directionFacing.equals("DOWN")
-                || directionFacing.equals("UP")) {
+        if(directionFacing.equals("RIGHT") && canMoveRight) {
             this.directionFacing = directionFacing;
+            canMoveRight = true;
+            canMoveLeft = false;
+            canMoveUp = true;
+            canMoveDown = true;
+        }
+        else if (directionFacing.equals("LEFT") && canMoveLeft) {
+            this.directionFacing = directionFacing;
+            canMoveRight = false;
+            canMoveLeft = true;
+            canMoveUp = true;
+            canMoveDown = true;
+        }
+        else if(directionFacing.equals("DOWN") && canMoveDown) {
+            this.directionFacing = directionFacing;
+            canMoveRight = true;
+            canMoveLeft = true;
+            canMoveUp = false;
+            canMoveDown = true;
+        }
+        else if(directionFacing.equals("UP") && canMoveUp) {
+            this.directionFacing = directionFacing;
+            canMoveRight = true;
+            canMoveLeft = true;
+            canMoveUp = true;
+            canMoveDown = false;
+
         }
     }
 
@@ -101,5 +135,37 @@ public class Snake {
 
     public void setyPos(double yPos) {
         this.yPos = yPos;
+    }
+
+    public boolean getCanMoveRight() {
+        return canMoveRight;
+    }
+
+    public void setCanMoveRight(boolean canMoveRight) {
+        this.canMoveRight = canMoveRight;
+    }
+
+    public boolean getCanMoveLeft() {
+        return canMoveLeft;
+    }
+
+    public void setCanMoveLeft(boolean canMoveLeft) {
+        this.canMoveLeft = canMoveLeft;
+    }
+
+    public boolean getCanMoveUp() {
+        return canMoveUp;
+    }
+
+    public void setCanMoveUp(boolean canMoveUp) {
+        this.canMoveUp = canMoveUp;
+    }
+
+    public boolean getCanMoveDown() {
+        return canMoveDown;
+    }
+
+    public void setCanMoveDown(boolean canMoveDown) {
+        this.canMoveDown = canMoveDown;
     }
 }

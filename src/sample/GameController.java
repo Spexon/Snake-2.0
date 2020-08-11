@@ -4,20 +4,35 @@ import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import javafx.animation.AnimationTimer;
 import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import org.w3c.dom.ls.LSOutput;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
 public class GameController implements Initializable {
 
-    public Label showDifficulty;
-    public ImageView snakeHead;
+    @FXML private Label deadLabel;
+    @FXML private Label showDifficulty;
+    @FXML private ImageView snakeHead;
+    @FXML private ImageView snakeBody;
+    private final Image snakeHeadRight = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0\\src\\sample\\Snake_Head_Right.png"));
+    private final Image snakeHeadLeft = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0\\src\\sample\\Snake_Head_Left.png"));
+    private final Image snakeHeadUp = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0\\src\\sample\\Snake_Head_Up.png"));
+    private final Image snakeHeadDown = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0\\src\\sample\\Snake_Head_Down.png"));
+
     private boolean notDead = true;
 
+    public GameController() throws FileNotFoundException {
+    }
 
     /**
      * Animates the snake so that it moves continuously.
@@ -30,30 +45,39 @@ public class GameController implements Initializable {
             @Override
             public void handle(long l) {
 
-                PreGameController.level.xyMovement();
-                if (PreGameController.level.getDirectionFacing().equals("RIGHT")) {
-                    snakeHead.setX(PreGameController.level.getxPos() + 2);
-                } else if (PreGameController.level.getDirectionFacing().equals("LEFT")) {
-                    snakeHead.setX(PreGameController.level.getxPos() - 2);
-                } else if (PreGameController.level.getDirectionFacing().equals("UP")) {
-                    snakeHead.setY(PreGameController.level.getyPos() - 2);
-                } else if (PreGameController.level.getDirectionFacing().equals("DOWN")) {
-                    snakeHead.setY(PreGameController.level.getyPos() + 2);
+                PreGameController.snake.xyMovement();
+                if (PreGameController.snake.getDirectionFacing().equals("RIGHT")) {
+                    snakeHead.setImage(snakeHeadRight);
+                    snakeHead.setX(PreGameController.snake.getxPos());
+                    snakeBody.setX(PreGameController.snake.getxPos() - 50);
+                } else if (PreGameController.snake.getDirectionFacing().equals("LEFT")) {
+                    snakeHead.setImage(snakeHeadLeft);
+                    snakeHead.setX(PreGameController.snake.getxPos());
+                    snakeBody.setX(PreGameController.snake.getxPos() + 50);
+                } else if (PreGameController.snake.getDirectionFacing().equals("UP")) {
+                    snakeHead.setImage(snakeHeadUp);
+                    snakeHead.setY(PreGameController.snake.getyPos());
+                    snakeBody.setY(PreGameController.snake.getyPos());
+                } else if (PreGameController.snake.getDirectionFacing().equals("DOWN")) {
+                    snakeHead.setImage(snakeHeadDown);
+                    snakeHead.setY(PreGameController.snake.getyPos());
+                    snakeBody.setY(PreGameController.snake.getyPos());
                 }
-                PreGameController.level.boundaryControl();
+                notDead = PreGameController.snake.boundaryControl();
+                if(!notDead) {
+                    deadLabel.setVisible(true);
+                }
             }
         };
         timer.start();
     }
 
-    public void handleSnakeMovement() {
-
-
+    public void handleDirectionChange(KeyEvent key) {
+        PreGameController.snake.setDirectionFacing(key.getCode().toString());
     }
 
-    public void handleDirectionChange(KeyEvent key) {
-
-        PreGameController.level.setDirectionFacing(key.getCode().toString());
+    public void handleBodyMovement() {
+        snakeBody.setX(PreGameController.snake.getxPos());
     }
 
     /**
@@ -62,7 +86,7 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        showDifficulty.setText("Difficulty: " + PreGameController.level.getDifficulty());
+        showDifficulty.setText("Difficulty: " + PreGameController.snake.getDifficulty());
         gameLoop();
     }
 }

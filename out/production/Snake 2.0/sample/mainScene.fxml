@@ -4,18 +4,33 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@MSStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
+<AnchorPane prefHeight="1080.0" prefWidth="1924.0" stylesheets="@MSStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
    <children>
-      <Label fx:id="showDifficulty" layoutX="1762.0" layoutY="27.0" text="Difficulty: " textFill="WHITE">
+      <ImageView fx:id="snakeHead" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="200.0" y="150.0">
+         <image>
+            <Image url="@Snake_Head_Right.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="deadLabel" layoutX="537.0" layoutY="220.0" text="YOU ARE DEAD" textFill="RED" visible="false">
          <font>
-            <Font size="14.0" />
+            <Font size="96.0" />
          </font>
       </Label>
-      <ImageView fx:id="snakeHead" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" layoutX="149.0" layoutY="51.0" onKeyPressed="#handleDirectionChange" pickOnBounds="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1111.0" layoutX="-8.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="107.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="106.0" layoutX="95.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1830.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1091.0" layoutX="1800.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="125.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="100.0" layoutX="88.0" layoutY="1003.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1812.0" />
+      <Label fx:id="showDifficulty" layoutX="1722.0" layoutY="37.0" text="Difficulty: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="snakeBody" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="150.0" y="150.0">
          <image>
-            <Image url="@Snake_Head.png" />
+            <Image url="@Snake_Body.png" />
          </image>
       </ImageView>
    </children>
