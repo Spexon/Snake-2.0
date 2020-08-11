@@ -13,7 +13,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="50.0" fitWidth="50.0" focusTraversable="true" layoutX="149.0" layoutY="51.0" onKeyPressed="#handleDirectionChange" pickOnBounds="true">
+      <ImageView fx:id="snakeHead" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" layoutX="149.0" layoutY="51.0" onKeyPressed="#handleDirectionChange" pickOnBounds="true">
          <image>
             <Image url="@Snake_Head.png" />
          </image>

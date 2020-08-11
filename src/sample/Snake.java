@@ -2,13 +2,14 @@ package sample;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javax.swing.plaf.DimensionUIResource;
 
 public class Snake {
 
     private int difficulty; // Easy = 1, Normal = 2, Hard = 3
-    private int speed;
-    private double xPos = 77;
-    private double yPos = 194;
+    private int speed = difficulty * 2;
+    private double xPos = 300;
+    private double yPos = 200;
     private String directionFacing = "RIGHT";
 
 
@@ -18,15 +19,13 @@ public class Snake {
     public void xyMovement() {
 
         if (directionFacing.equals("RIGHT")) {
-            xPos++;
+            xPos += 2;
         } else if (directionFacing.equals("LEFT")) {
-            xPos--;
+            xPos -= 2;
         } else if (directionFacing.equals("UP")) {
-            yPos--;
+            yPos -= 2;
         } else if (directionFacing.equals("DOWN")) {
-            yPos++;
-        } else {
-            System.out.println("Error in xyMovement!");
+            yPos += 2;
         }
     }
 
@@ -73,8 +72,19 @@ public class Snake {
         return directionFacing;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
     public void setDirectionFacing(String directionFacing) {
-        this.directionFacing = directionFacing;
+        if(directionFacing.equals("RIGHT") || directionFacing.equals("LEFT") || directionFacing.equals("DOWN")
+                || directionFacing.equals("UP")) {
+            this.directionFacing = directionFacing;
+        }
     }
 
     public double getxPos() {

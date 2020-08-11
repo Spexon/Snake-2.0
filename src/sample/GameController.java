@@ -30,17 +30,15 @@ public class GameController implements Initializable {
             @Override
             public void handle(long l) {
 
-
+                PreGameController.level.xyMovement();
                 if (PreGameController.level.getDirectionFacing().equals("RIGHT")) {
                     snakeHead.setX(PreGameController.level.getxPos() + 2);
                 } else if (PreGameController.level.getDirectionFacing().equals("LEFT")) {
                     snakeHead.setX(PreGameController.level.getxPos() - 2);
                 } else if (PreGameController.level.getDirectionFacing().equals("UP")) {
-                    snakeHead.setY(PreGameController.level.getyPos() + 2);
-                } else if (PreGameController.level.getDirectionFacing().equals("DOWN")) {
                     snakeHead.setY(PreGameController.level.getyPos() - 2);
-                } else {
-                    System.out.println("Error in xyMovement!");
+                } else if (PreGameController.level.getDirectionFacing().equals("DOWN")) {
+                    snakeHead.setY(PreGameController.level.getyPos() + 2);
                 }
                 PreGameController.level.boundaryControl();
             }
@@ -56,7 +54,6 @@ public class GameController implements Initializable {
     public void handleDirectionChange(KeyEvent key) {
 
         PreGameController.level.setDirectionFacing(key.getCode().toString());
-
     }
 
     /**
