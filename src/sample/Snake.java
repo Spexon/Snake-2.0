@@ -87,31 +87,29 @@ public class Snake {
 
     /**
      * Ensures that only keypad values are accepted and that the snake cannot move into itself.
+     *
      * @param directionFacing the direction that the snake is being requested to face.
      */
     public void setDirectionFacing(String directionFacing) {
-        if(directionFacing.equals("RIGHT") && canMoveRight) {
+        if (directionFacing.equals("RIGHT") && canMoveRight) {
             this.directionFacing = directionFacing;
             canMoveRight = true;
             canMoveLeft = false;
             canMoveUp = true;
             canMoveDown = true;
-        }
-        else if (directionFacing.equals("LEFT") && canMoveLeft) {
+        } else if (directionFacing.equals("LEFT") && canMoveLeft) {
             this.directionFacing = directionFacing;
             canMoveRight = false;
             canMoveLeft = true;
             canMoveUp = true;
             canMoveDown = true;
-        }
-        else if(directionFacing.equals("DOWN") && canMoveDown) {
+        } else if (directionFacing.equals("DOWN") && canMoveDown) {
             this.directionFacing = directionFacing;
             canMoveRight = true;
             canMoveLeft = true;
             canMoveUp = false;
             canMoveDown = true;
-        }
-        else if(directionFacing.equals("UP") && canMoveUp) {
+        } else if (directionFacing.equals("UP") && canMoveUp) {
             this.directionFacing = directionFacing;
             canMoveRight = true;
             canMoveLeft = true;

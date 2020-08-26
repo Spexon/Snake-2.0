@@ -1,17 +1,13 @@
 package sample;
 
-import com.sun.source.util.TaskEvent;
-import com.sun.source.util.TaskListener;
+
 import javafx.animation.AnimationTimer;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -20,10 +16,16 @@ import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
 
-    @FXML private Label deadLabel;
-    @FXML private Label showDifficulty;
-    @FXML private ImageView snakeHead;
-    @FXML private ImageView snakeBody;
+    @FXML
+    private Label deadLabel;
+    @FXML
+    private Label showDifficulty;
+    @FXML
+    private ImageView snakeHead;
+    @FXML
+    private ImageView snakeBody;
+    private double bodyTurnLocationX;
+    private double bodyTurnLocationY;
     private final Image snakeHeadRight = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0\\src\\sample\\Snake_Head_Right.png"));
     private final Image snakeHeadLeft = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0\\src\\sample\\Snake_Head_Left.png"));
     private final Image snakeHeadUp = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0\\src\\sample\\Snake_Head_Up.png"));
@@ -45,26 +47,36 @@ public class GameController implements Initializable {
             @Override
             public void handle(long l) {
 
+                bodyTurnLocationX = snakeHead.getX();
+                bodyTurnLocationY = snakeHead.getY();
                 PreGameController.snake.xyMovement();
                 if (PreGameController.snake.getDirectionFacing().equals("RIGHT")) {
                     snakeHead.setImage(snakeHeadRight);
                     snakeHead.setX(PreGameController.snake.getxPos());
-                    snakeBody.setX(PreGameController.snake.getxPos() - 50);
+                    moveBody();
+                    //snakeBody.setY(bodyTurnLocationY);
+                    //snakeBody.setX(PreGameController.snake.getxPos() - 50);
                 } else if (PreGameController.snake.getDirectionFacing().equals("LEFT")) {
                     snakeHead.setImage(snakeHeadLeft);
                     snakeHead.setX(PreGameController.snake.getxPos());
-                    snakeBody.setX(PreGameController.snake.getxPos() + 50);
+                    moveBody();
+                    //snakeBody.setY(bodyTurnLocationY);
+                    //snakeBody.setX(PreGameController.snake.getxPos() + 50);
                 } else if (PreGameController.snake.getDirectionFacing().equals("UP")) {
                     snakeHead.setImage(snakeHeadUp);
                     snakeHead.setY(PreGameController.snake.getyPos());
-                    snakeBody.setY(PreGameController.snake.getyPos());
+                    moveBody();
+                    //snakeBody.setX(bodyTurnLocationX);
+                    //snakeBody.setY(PreGameController.snake.getyPos() + 50);
                 } else if (PreGameController.snake.getDirectionFacing().equals("DOWN")) {
                     snakeHead.setImage(snakeHeadDown);
                     snakeHead.setY(PreGameController.snake.getyPos());
-                    snakeBody.setY(PreGameController.snake.getyPos());
+                    moveBody();
+                    //snakeBody.setX(bodyTurnLocationX);
+                    //snakeBody.setY(PreGameController.snake.getyPos() - 50);
                 }
                 notDead = PreGameController.snake.boundaryControl();
-                if(!notDead) {
+                if (!notDead) {
                     deadLabel.setVisible(true);
                 }
             }
@@ -76,8 +88,18 @@ public class GameController implements Initializable {
         PreGameController.snake.setDirectionFacing(key.getCode().toString());
     }
 
-    public void handleBodyMovement() {
-        snakeBody.setX(PreGameController.snake.getxPos());
+    /**
+     * If the snake x and y were an array, this would move properly
+     */
+    public void moveBody() {
+        for (int z = 50; z > 0; z--) { // X and Y position of snake
+
+            snakeBody.setX(z - 1);
+            snakeBody.setY(z - 1);
+
+            //    X[z] = X[(z - 1)];
+            //    Y[z] = Y[(z - 1)];
+        }
     }
 
     /**

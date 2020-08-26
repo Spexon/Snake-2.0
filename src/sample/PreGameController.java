@@ -17,8 +17,10 @@ public class PreGameController {
 
 
     public static Snake snake = new Snake();
-    @FXML private Button beginBtn;
-    @FXML private AnchorPane anchorPane;
+    @FXML
+    private Button beginBtn;
+    @FXML
+    private AnchorPane anchorPane;
 
     /**
      * Difficulty selectors, tried to make this one method, but couldn't understand how to differentiate the buttons.
