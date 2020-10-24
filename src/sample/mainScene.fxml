@@ -6,10 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="1080.0" prefWidth="1924.0" stylesheets="@MSStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
    <children>
-      <Label fx:id="deadLabel" layoutX="537.0" layoutY="220.0" text="YOU ARE DEAD" textFill="RED" visible="false">
+      <Label fx:id="deadLabel" layoutX="598.0" layoutY="222.0" prefHeight="141.0" prefWidth="701.0" text="YOU ARE DEAD" textFill="RED" visible="false">
          <font>
             <Font size="96.0" />
          </font>
@@ -28,7 +29,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="106.0" layoutX="95.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1830.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1091.0" layoutX="1800.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="125.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="100.0" layoutX="88.0" layoutY="1003.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1812.0" />
-      <ImageView fx:id="apple" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="1750.0" y="950.0">
+      <ImageView fx:id="apple" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" visible="false" x="1750.0" y="950.0">
          <image>
             <Image url="@Apple.png" />
          </image>
@@ -38,15 +39,31 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="scoreDisplay" layoutX="1722.0" layoutY="58.0" text="Score:">
+      <Label fx:id="scoreDisplay" layoutX="1722.0" layoutY="58.0" text="Score: 0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="scoreDisplayAnimation" prefHeight="70.0" prefWidth="116.0" text="+100" textFill="RED" visible="false">
+      <Label fx:id="scoreDisplayAnimation100" prefHeight="70.0" prefWidth="116.0" text="+100" textFill="RED" visible="false">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
+      <Label fx:id="scoreDisplayAnimation200" prefHeight="70.0" prefWidth="116.0" text="+200" textFill="RED" visible="false">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="scoreDisplayAnimation300" prefHeight="70.0" prefWidth="116.0" text="+300" textFill="RED" visible="false">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="screenOverlay" arcHeight="5.0" arcWidth="5.0" fill="#797272" height="903.0" layoutX="99.0" layoutY="100.0" onMouseClicked="#startGame" opacity="0.7" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1703.0" />
+      <Text fx:id="screenOverlayText" disable="true" layoutX="819.0" layoutY="565.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click To Begin">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
