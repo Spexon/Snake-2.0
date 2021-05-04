@@ -18,8 +18,8 @@ public class Snake {
 
 
   /**
-   * Continuously moves the snake in the desired direction depending on keyboard input, speed based
-   * on difficulty
+   * Continuously moves the snake in the desired direction depending on keyboard input, speed is
+   * based on difficulty
    */
   public void xyMovement() throws FileNotFoundException {
 
