@@ -81,11 +81,8 @@ public class GameController implements Initializable {
                 bodyTurnLocationX = (int) snakeHead.getX();
                 bodyTurnLocationY = (int) snakeHead.getY();
 
-                try {
-                    PreGameController.snake.xyMovement();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                PreGameController.snake.xyMovement();
+
                 moveBody();
 
                 if (PreGameController.snake.getDirectionFacing().equals("RIGHT")) {
@@ -130,21 +127,20 @@ public class GameController implements Initializable {
 
 
     /**
-     * If the snake x and y were an array, this would move properly (new)
+     * Moves body so that it trails behind the head after each direction change
      */
     public void moveBody() {
 
         for (int z = allBodies.size() - 1; z > 0; z--) { // X position of snake body
-            System.out.println("____Previous Direction____ " + previousDirection);
-            System.out.println("Current Direction " + PreGameController.snake.getDirectionFacing());
+
                 if (PreGameController.snake.getDirectionFacing().equals("RIGHT")) {
 
                     // Moves body to where the head was before it changed directions
-                    if (snakeBody.getY() != bodyTurnLocationY && previousDirection.equals("DOWN")) {
+                    if (snakeBody.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
                         snakeBody.setY(snakeBody.getY() + PreGameController.snake.getSpeed());
                         return;
                     }
-                    else if (snakeBody.getX() != bodyTurnLocationX && previousDirection.equals("UP")) {
+                    else if (snakeBody.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
                         snakeBody.setY(snakeBody.getY() - PreGameController.snake.getSpeed());
                         return;
                     }
@@ -152,13 +148,13 @@ public class GameController implements Initializable {
                         allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY);
                         allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - 50);
 
-                }   else if (PreGameController.snake.getDirectionFacing().equals("LEFT")) {
+                }else if (PreGameController.snake.getDirectionFacing().equals("LEFT")) {
 
-                    if (snakeBody.getY() != bodyTurnLocationY && previousDirection.equals("DOWN")) {
+                    if (snakeBody.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
                         snakeBody.setY(snakeBody.getY() + PreGameController.snake.getSpeed());
                         return;
                     }
-                    else if (snakeBody.getX() != bodyTurnLocationX && previousDirection.equals("UP")) {
+                    else if (snakeBody.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
                         snakeBody.setY(snakeBody.getY() - PreGameController.snake.getSpeed());
                         return;
                     }
@@ -166,13 +162,13 @@ public class GameController implements Initializable {
                     allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY);
                     allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX + 50);
 
-                }   else if (PreGameController.snake.getDirectionFacing().equals("DOWN")) {
+                }else if (PreGameController.snake.getDirectionFacing().equals("DOWN")) {
 
-                    if (snakeBody.getX() != bodyTurnLocationX && previousDirection.equals("RIGHT")) {
+                    if (snakeBody.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
                         snakeBody.setX(snakeBody.getX() + PreGameController.snake.getSpeed());
                         return;
                     }
-                    else if (snakeBody.getX() != bodyTurnLocationX && previousDirection.equals("LEFT")) {
+                    else if (snakeBody.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
                         snakeBody.setX(snakeBody.getX() - PreGameController.snake.getSpeed());
                         return;
                     }
@@ -180,13 +176,13 @@ public class GameController implements Initializable {
                     allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY - 50);
                     allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX);
 
-                }  else if (PreGameController.snake.getDirectionFacing().equals("UP")) {
+                }else if (PreGameController.snake.getDirectionFacing().equals("UP")) {
 
-                    if (snakeBody.getX() != bodyTurnLocationX && previousDirection.equals("RIGHT")) {
+                    if (snakeBody.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
                         snakeBody.setX(snakeBody.getX() + PreGameController.snake.getSpeed());
                         return;
                     }
-                    else if (snakeBody.getX() != bodyTurnLocationX && previousDirection.equals("LEFT")) {
+                    else if (snakeBody.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
                         snakeBody.setX(snakeBody.getX() - PreGameController.snake.getSpeed());
                         return;
                     }

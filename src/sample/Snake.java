@@ -21,11 +21,11 @@ public class Snake {
    * Continuously moves the snake in the desired direction depending on keyboard input, speed is
    * based on difficulty
    */
-  public void xyMovement() throws FileNotFoundException {
+  public void xyMovement() {
 
-    GameController gc = new GameController();
+    //GameController gc = new GameController();
     //gc.moveBody();
-    speed = difficulty * 2.0;
+    speed = difficulty * 1.5;
     if (directionFacing.equals("RIGHT")) {
       xPos += speed;
     } else if (directionFacing.equals("LEFT")) {
