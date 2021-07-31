@@ -61,22 +61,22 @@ public class GameController implements Initializable {
      * Generates all objects after game begins
      */
     public void startGame() {
+        showDifficulty.setText("Difficulty: " + PreGameController.snake.getDifficulty());
         screenOverlay.setVisible(false);
         screenOverlayText.setVisible(false);
         gameLoop();
         apple.setVisible(true);
         generateApple();
-        generateBody();
+        generateBody(2);
     }
 
 
     public void gameLoop() {
 
-        // game loop experimental
+        // game loop
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                SnakeBody body = generateBody();
 
                 bodyTurnLocationX = (int) snakeHead.getX();
                 bodyTurnLocationY = (int) snakeHead.getY();
@@ -85,6 +85,7 @@ public class GameController implements Initializable {
 
                 moveBody();
 
+                // SnakeHead image movement
                 if (PreGameController.snake.getDirectionFacing().equals("RIGHT")) {
                     snakeHead.setImage(snakeHeadRight);
                     snakeHead.setX(PreGameController.snake.getxPos());
@@ -131,8 +132,8 @@ public class GameController implements Initializable {
      */
     public void moveBody() {
 
-        for (int z = allBodies.size() - 1; z > 0; z--) { // X position of snake body
-
+       for (int z = allBodies.size() - 1; z > 0; z--) { // X position of snake body
+            System.out.println("bodies: " + allBodies.size());
                 if (PreGameController.snake.getDirectionFacing().equals("RIGHT")) {
 
                     // Moves body to where the head was before it changed directions
@@ -146,7 +147,9 @@ public class GameController implements Initializable {
                     }
 
                         allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY);
-                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - 50);
+                        //allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - 50);
+                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - (50 * allBodies
+                            .size()));
 
                 }else if (PreGameController.snake.getDirectionFacing().equals("LEFT")) {
 
@@ -204,12 +207,16 @@ public class GameController implements Initializable {
     }
 
     /**
-     * Generates a snake body and appends to the body arraylist.
+     * Generates a number of snake bodies and appends them to the body arraylist.
      * Trying to dynamically add more bodies with apple consumption.
      */
-    public SnakeBody generateBody() {
-        SnakeBody body = new SnakeBody(snakeBody);
-        allBodies.add(body);
+    public SnakeBody generateBody(int num) {
+        SnakeBody body = null;
+        for (int i = 0; i < num; i++) {
+            body = new SnakeBody(snakeBody);
+            allBodies.add(body);
+
+        }
         return body;
     }
 
@@ -230,7 +237,7 @@ public class GameController implements Initializable {
                 setScore(scoreDisplayAnimation300);
             }
             generateApple();
-            generateBody();
+            generateBody(1);
         }
     }
 
@@ -268,6 +275,6 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        showDifficulty.setText("Difficulty: " + PreGameController.snake.getDifficulty());
+
     }
 }
