@@ -25,7 +25,7 @@ public class Snake {
 
     //GameController gc = new GameController();
     //gc.moveBody();
-    speed = difficulty * 1.5;
+    speed = difficulty * 1.25;
     if (directionFacing.equals("RIGHT")) {
       xPos += speed;
     } else if (directionFacing.equals("LEFT")) {
@@ -116,6 +116,32 @@ public class Snake {
       canMoveUp = false;
       canMoveDown = true;
     } else if (directionFacing.equals("UP") && canMoveUp) {
+      this.directionFacing = directionFacing;
+      canMoveRight = true;
+      canMoveLeft = true;
+      canMoveUp = true;
+      canMoveDown = false;
+
+    }
+    if (directionFacing.equals("w") && canMoveRight) {
+      this.directionFacing = directionFacing;
+      canMoveRight = true;
+      canMoveLeft = false;
+      canMoveUp = true;
+      canMoveDown = true;
+    } else if (directionFacing.equals("a") && canMoveLeft) {
+      this.directionFacing = directionFacing;
+      canMoveRight = false;
+      canMoveLeft = true;
+      canMoveUp = true;
+      canMoveDown = true;
+    } else if (directionFacing.equals("s") && canMoveDown) {
+      this.directionFacing = directionFacing;
+      canMoveRight = true;
+      canMoveLeft = true;
+      canMoveUp = false;
+      canMoveDown = true;
+    } else if (directionFacing.equals("d") && canMoveUp) {
       this.directionFacing = directionFacing;
       canMoveRight = true;
       canMoveLeft = true;
