@@ -3,3 +3,6 @@ A replication and improvement to the [snake](https://github.com/Spexon/PersonalP
 
 ## General Program Features
 ![UML Diagram](https://gyazo.com/7d3ebf8904ae3fb24fc50f181f11c319.png)
+
+
+# To get JavaFX working locally, download JavaFX and add the exe files from its lib folder. Add all the exe files to the libraries in IntelliJ Project settings and apply.

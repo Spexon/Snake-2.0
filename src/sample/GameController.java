@@ -35,22 +35,32 @@ public class GameController implements Initializable {
     @FXML private Label deadLabel;
     @FXML private Label showDifficulty;
     @FXML private ImageView snakeHead;
-    @FXML private ImageView snakeBody;
+    @FXML private ImageView stationaryBody;
+
+    @FXML private ImageView snakeBodyView; // The view is what gets controlled in the scene
     @FXML private ImageView apple;
     private int score = 0;
-    private ArrayList<SnakeBody> allBodies = new ArrayList<>();
+    private final ArrayList<SnakeBody> allBodies = new ArrayList<>();
     private double bodyTurnLocationX;
     private double bodyTurnLocationY;
     private String previousDirection = "RIGHT";
+    private AnimationTimer timer;
 
-    private final Image snakeHeadRight = new Image(new FileInputStream(
-        "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Head_Right.png"));
+  /**
+   * An image by itself cannot be added to the scene graph.
+   * It must first be embedded in an ImageView.
+   */
+  private final Image snakeHeadRight = new Image(new FileInputStream(
+      "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Head_Right.png"));
     private final Image snakeHeadLeft = new Image(new FileInputStream(
         "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Head_Left.png"));
     private final Image snakeHeadUp = new Image(new FileInputStream(
         "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Head_Up.png"));
     private final Image snakeHeadDown = new Image(new FileInputStream(
         "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Head_Down.png"));
+
+//    private final Image snakeBody = new Image(new FileInputStream(
+//     "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Body.png"));
 
     private boolean notDead = true;
 
@@ -74,7 +84,7 @@ public class GameController implements Initializable {
     public void gameLoop() {
 
         // game loop
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
 
@@ -111,10 +121,12 @@ public class GameController implements Initializable {
 
 
                 }
+                // Snake collision
                 notDead = PreGameController.snake.boundaryControl();
                 checkSnakeCollision();
                 if (!notDead) {
                     deadLabel.setVisible(true);
+                    timer.stop();
                 }
             }
         };
@@ -132,66 +144,124 @@ public class GameController implements Initializable {
      */
     public void moveBody() {
 
-       for (int z = allBodies.size() - 1; z > 0; z--) { // X position of snake body
-            System.out.println("bodies: " + allBodies.size());
+       for (int z = allBodies.size() - 1; z > 0; z--) { // reevaluate what this does <---
+        System.out.println("bodies: " + allBodies.size());
+
                 if (PreGameController.snake.getDirectionFacing().equals("RIGHT")) {
 
                     // Moves body to where the head was before it changed directions
-                    if (snakeBody.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
-                        snakeBody.setY(snakeBody.getY() + PreGameController.snake.getSpeed());
+                    if (snakeBodyView.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
+                        snakeBodyView.setY(snakeBodyView.getY() + PreGameController.snake.getSpeed());
+                        stationaryBody.setY(snakeBodyView.getY() - 50);
                         return;
                     }
-                    else if (snakeBody.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
-                        snakeBody.setY(snakeBody.getY() - PreGameController.snake.getSpeed());
+                    else if (snakeBodyView.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
+                        snakeBodyView.setY(snakeBodyView.getY() - PreGameController.snake.getSpeed());
+                        stationaryBody.setY(snakeBodyView.getY() + 50);
+                        return;
+                    }
+                    if (stationaryBody.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
+                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - 50);
+                        stationaryBody.setY(stationaryBody.getY() + PreGameController.snake
+                            .getSpeed());
+                        return;
+                    }
+                    else if (stationaryBody.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
+                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - 50);
+                        stationaryBody.setY(stationaryBody.getY() - PreGameController.snake
+                            .getSpeed());
                         return;
                     }
 
-                        allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY);
-                        //allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - 50);
-                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - (50 * allBodies
-                            .size()));
+                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX - 50);
+                        stationaryBody.setX(snakeBodyView.getX() - 50);
+
 
                 }else if (PreGameController.snake.getDirectionFacing().equals("LEFT")) {
 
-                    if (snakeBody.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
-                        snakeBody.setY(snakeBody.getY() + PreGameController.snake.getSpeed());
+                    if (snakeBodyView.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
+                        snakeBodyView.setY(snakeBodyView.getY() + PreGameController.snake.getSpeed());
+                        stationaryBody.setY(snakeBodyView.getY() - 50);
                         return;
                     }
-                    else if (snakeBody.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
-                        snakeBody.setY(snakeBody.getY() - PreGameController.snake.getSpeed());
+                    else if (snakeBodyView.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
+                        snakeBodyView.setY(snakeBodyView.getY() - PreGameController.snake.getSpeed());
+                        stationaryBody.setY(snakeBodyView.getY() + 50);
+                        return;
+                    }
+                    if (stationaryBody.getY() < bodyTurnLocationY && previousDirection.equals("DOWN")) {
+                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX + 50);
+                        stationaryBody.setY(stationaryBody.getY() + PreGameController.snake
+                            .getSpeed());
+                        return;
+                    }
+                    else if (stationaryBody.getY() > bodyTurnLocationY && previousDirection.equals("UP")) {
+                        allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX + 50);
+                        stationaryBody.setY(stationaryBody.getY() - PreGameController.snake
+                            .getSpeed());
                         return;
                     }
 
-                    allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY);
+
                     allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX + 50);
+                    stationaryBody.setX(snakeBodyView.getX() + 50);
 
                 }else if (PreGameController.snake.getDirectionFacing().equals("DOWN")) {
 
-                    if (snakeBody.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
-                        snakeBody.setX(snakeBody.getX() + PreGameController.snake.getSpeed());
+                    if (snakeBodyView.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
+                        snakeBodyView.setX(snakeBodyView.getX() + PreGameController.snake.getSpeed());
+                        stationaryBody.setX(snakeBodyView.getX() - 50);
                         return;
                     }
-                    else if (snakeBody.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
-                        snakeBody.setX(snakeBody.getX() - PreGameController.snake.getSpeed());
+                    else if (snakeBodyView.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
+                        snakeBodyView.setX(snakeBodyView.getX() - PreGameController.snake.getSpeed());
+                        stationaryBody.setX(snakeBodyView.getX() + 50);
+                        return;
+                    }
+                    if (stationaryBody.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
+                        allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY - 50);
+                        stationaryBody.setX(stationaryBody.getX() + PreGameController.snake
+                            .getSpeed());
+                        return;
+                    }
+                    else if (stationaryBody.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
+                        allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY - 50);
+                        stationaryBody.setX(stationaryBody.getX() - PreGameController.snake
+                            .getSpeed());
                         return;
                     }
 
+
                     allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY - 50);
-                    allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX);
+                    stationaryBody.setY(snakeBodyView.getY() - 50);
 
                 }else if (PreGameController.snake.getDirectionFacing().equals("UP")) {
 
-                    if (snakeBody.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
-                        snakeBody.setX(snakeBody.getX() + PreGameController.snake.getSpeed());
+                    if (snakeBodyView.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
+                        snakeBodyView.setX(snakeBodyView.getX() + PreGameController.snake.getSpeed());
+                        stationaryBody.setX(snakeBodyView.getX() - 50);
                         return;
                     }
-                    else if (snakeBody.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
-                        snakeBody.setX(snakeBody.getX() - PreGameController.snake.getSpeed());
+                    else if (snakeBodyView.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
+                        snakeBodyView.setX(snakeBodyView.getX() - PreGameController.snake.getSpeed());
+                        stationaryBody.setX(snakeBodyView.getX() + 50);
+                        return;
+                    }
+                    if (stationaryBody.getX() < bodyTurnLocationX && previousDirection.equals("RIGHT")) {
+                        allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY + 50);
+                        stationaryBody.setX(stationaryBody.getX() + PreGameController.snake
+                            .getSpeed());
+                        return;
+                    }
+                    else if (stationaryBody.getX() > bodyTurnLocationX && previousDirection.equals("LEFT")) {
+                        allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY + 50);
+                        stationaryBody.setX(stationaryBody.getX() - PreGameController.snake
+                            .getSpeed());
                         return;
                     }
 
                     allBodies.get(z).getSnakeBody().setY(bodyTurnLocationY + 50);
-                    allBodies.get(z).getSnakeBody().setX(bodyTurnLocationX);
+                    stationaryBody.setY(snakeBodyView.getY() + 50);
 
                 }
         }
@@ -210,14 +280,14 @@ public class GameController implements Initializable {
      * Generates a number of snake bodies and appends them to the body arraylist.
      * Trying to dynamically add more bodies with apple consumption.
      */
-    public SnakeBody generateBody(int num) {
-        SnakeBody body = null;
+    public void generateBody(int num) {
+        SnakeBody body;
         for (int i = 0; i < num; i++) {
-            body = new SnakeBody(snakeBody);
+            body = new SnakeBody(snakeBodyView, stationaryBody);
             allBodies.add(body);
 
         }
-        return body;
+        //return body;
     }
 
     /**
