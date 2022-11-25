@@ -281,12 +281,12 @@ public class GameController implements Initializable {
      * Trying to dynamically add more bodies with apple consumption.
      */
     public void generateBody(int num) {
-        SnakeBody body;
-        for (int i = 0; i < num; i++) {
-            body = new SnakeBody(snakeBodyView, stationaryBody);
-            allBodies.add(body);
-
-        }
+//        SnakeBody body;
+//        for (int i = 0; i < num; i++) {
+//            body = new SnakeBody(snakeBodyView, stationaryBody);
+//            allBodies.add(body);
+//
+//        }
         //return body;
     }
 
