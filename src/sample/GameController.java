@@ -54,6 +54,7 @@ public class GameController {
         "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Head_Up.png"));
     private final Image snakeHeadDown = new Image(new FileInputStream(
         "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Head_Down.png"));
+    private final Image appleImg = new Image(new FileInputStream("C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Apple.png"));
 
 //    private final Image snakeBody = new Image(new FileInputStream(
 //     "C:\\Users\\Vladimir\\OneDrive - Florida Gulf Coast University\\Personal Projects\\Snake 2.0 (With Git Working)\\src\\sample\\Snake_Body.png"));
@@ -70,6 +71,7 @@ public class GameController {
         showDifficulty.setText("Difficulty: " + PreGameController.snake.getDifficulty());
         screenOverlay.setVisible(false);
         screenOverlayText.setVisible(false);
+        apple.setImage(appleImg);
         apple.setVisible(true);
         generateApple();
         generateBody(2);
