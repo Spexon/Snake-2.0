@@ -16,22 +16,25 @@
          </font>
       </Label>
       <ImageView fx:id="snakeHead" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="200.0" y="150.0">
+         <image>
+            <Image url="@Snake_Head.png" />
+         </image>
       </ImageView>
 <!--      <ImageView fx:id="stationaryBody" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" pickOnBounds="true" x="150.0" y="150.0">-->
 <!--         <image>-->
 <!--            <Image url="@Snake_Body.png" />-->
 <!--         </image>-->
 <!--      </ImageView>-->
-      <ImageView fx:id="snakeBodyView" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="150.0" y="150.0">
+      <ImageView fx:id="snakeBodyView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" x="150.0" y="150.0">
          <image>
-            <Image url="@Snake_Body.png"/>
+            <Image url="@Snake_Body.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1111.0" layoutX="-8.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="107.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="106.0" layoutX="95.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1830.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1091.0" layoutX="1800.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="125.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="100.0" layoutX="88.0" layoutY="1003.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1812.0" />
-      <ImageView fx:id="apple" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" visible="false" x="1750.0" y="950.0">
+      <ImageView fx:id="apple" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" x="1750.0" y="950.0">
          <image>
             <Image url="@Apple.png" />
          </image>

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class PreGameController {
 
 
-    public static Snake snake = new Snake();
+    public static Snake snake = new Snake(); // No reason this should be defined here..
     @FXML
     private Button beginBtn;
     @FXML
