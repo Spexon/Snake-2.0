@@ -10,9 +10,8 @@ public class SnakeBody extends Snake {
   private double stationaryBodyY;
 
 
-  public SnakeBody(ImageView snakeBody, ImageView stationaryBody) {
+  public SnakeBody(ImageView snakeBody) {
     this.snakeBody = snakeBody;
-    this.stationaryBody = stationaryBody;
   }
 
   public ImageView getSnakeBody() {
