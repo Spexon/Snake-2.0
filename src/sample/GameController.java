@@ -132,7 +132,6 @@ public class GameController {
         headTurnLocation[0] = PreGameController.snake.getxPos();
         headTurnLocation[1] = PreGameController.snake.getyPos();
         PreGameController.snake.setDirectionFacing(key.getCode().toString());
-        System.out.println(headTurnLocation[0] + ", " + headTurnLocation[1]);
     }
 
   /**
