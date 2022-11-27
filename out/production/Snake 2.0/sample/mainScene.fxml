@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -10,20 +10,19 @@
 
 <AnchorPane prefHeight="1080.0" prefWidth="1924.0" stylesheets="@MSStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
    <children>
-      <Label fx:id="deadLabel" layoutX="598.0" layoutY="222.0" prefHeight="141.0" prefWidth="701.0" text="YOU ARE DEAD" textFill="RED" visible="false">
-         <font>
-            <Font size="96.0" />
-         </font>
-      </Label>
       <ImageView fx:id="snakeHead" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="200.0" y="150.0" />
-
-      <ImageView fx:id="snakeBodyView" fitHeight="50.0" onKeyPressed="#handleDirectionChange" fitWidth="50.0" pickOnBounds="true" x="150.0" y="150.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1111.0" layoutX="-8.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="107.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="106.0" layoutX="95.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1830.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1091.0" layoutX="1800.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="125.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="100.0" layoutX="88.0" layoutY="1003.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1812.0" />
       <ImageView fx:id="apple" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" visible="false" x="1750.0" y="950.0">
       </ImageView>
+      <Group fx:id="bodyGroup">
+         <children>
+
+            <ImageView fx:id="snakeBodyView" fitHeight="50.0" fitWidth="50.0" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="150.0" y="150.0" />
+         </children>
+      </Group>
 
       <Label fx:id="showDifficulty" layoutX="1722.0" layoutY="19.0" text="Difficulty: ">
          <font>
@@ -48,6 +47,11 @@
       <Label fx:id="scoreDisplayAnimation300" prefHeight="70.0" prefWidth="116.0" text="+300" textFill="RED" visible="false">
          <font>
             <Font size="48.0" />
+         </font>
+      </Label>
+      <Label fx:id="deadLabel" layoutX="598.0" layoutY="222.0" prefHeight="141.0" prefWidth="701.0" text="YOU ARE DEAD" textFill="RED" visible="false">
+         <font>
+            <Font size="96.0" />
          </font>
       </Label>
       <Rectangle fx:id="screenOverlay" arcHeight="5.0" arcWidth="5.0" fill="#797272" height="903.0" layoutX="99.0" layoutY="100.0" onMouseClicked="#startGame" opacity="0.7" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1703.0" />

@@ -1,21 +1,23 @@
 package sample;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class SnakeBody extends Snake {
 
-  private ImageView snakeBody;
+  private ImageView snakeBodyView;
   private ImageView stationaryBody;
   private double stationaryBodyX;
   private double stationaryBodyY;
 
 
-  public SnakeBody(ImageView snakeBody) {
-    this.snakeBody = snakeBody;
+  public SnakeBody() {
   }
 
   public ImageView getSnakeBody() {
-    return snakeBody;
+    return snakeBodyView;
   }
 
   public ImageView getStationaryBody() {
@@ -39,7 +41,7 @@ public class SnakeBody extends Snake {
   }
 
   public void setSnakeBody(ImageView snakeBody) {
-    this.snakeBody = snakeBody;
+    this.snakeBodyView = snakeBody;
   }
 
   public void setStationaryBody(ImageView stationaryBody) {
