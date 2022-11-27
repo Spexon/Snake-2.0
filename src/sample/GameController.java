@@ -1,7 +1,8 @@
 package sample;
 
 
-import java.util.ArrayList;
+import java.util.*;
+
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -17,7 +18,6 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Random;
 
 
 public class GameController {
@@ -36,7 +36,9 @@ public class GameController {
     @FXML private ImageView apple;
     private int score = 0;
     private ArrayList<ImageView> totalBodies = new ArrayList<>();
-    double [] headTurnLocation = new double[2]; // x = 0, y = 1
+    //private double [] headTurnLocation = new double[2]; // x = 0, y = 1
+
+    private Queue<double[]> headTurnLocation = new LinkedList<>();
     private String previousDirection = "RIGHT";
     private AnimationTimer timer;
 
@@ -66,7 +68,8 @@ public class GameController {
      * Generates all objects after game begins
      */
     public void startGame() {
-      // Set Images
+      initializeQueue();
+
       apple.setImage(appleImg);
       snakeBodyView.setImage(snakeBodyImg);
 
@@ -75,6 +78,7 @@ public class GameController {
       screenOverlayText.setVisible(false);
       apple.setVisible(true);
       totalBodies.add(snakeBodyView);
+
       generateBody();
       generateApple();
       gameLoop();
@@ -122,11 +126,12 @@ public class GameController {
     }
 
     public void handleDirectionChange(KeyEvent key) {
+
+        headTurnLocation.add(new double[] {PreGameController.snake.getxPos(),PreGameController.snake.getyPos()} );
+//        headTurnLocation[0] = PreGameController.snake.getxPos();
+//        headTurnLocation[1] = PreGameController.snake.getyPos();
         previousDirection = PreGameController.snake.getDirectionFacing();
-        headTurnLocation[0] = PreGameController.snake.getxPos();
-        headTurnLocation[1] = PreGameController.snake.getyPos();
         PreGameController.snake.setDirectionFacing(key.getCode().toString());
-        //System.out.println(headTurnLocation[0] + ", " + headTurnLocation[1]);
     }
 
   /**
@@ -138,21 +143,23 @@ public class GameController {
 
         switch (PreGameController.snake.getDirectionFacing()) {
           case "RIGHT" -> {
-            if (previousDirection.equals("DOWN") && totalBodies.get(i).getY() < headTurnLocation[1]) {
+            System.out.println(headTurnLocation.peek()[1]);
+            if (previousDirection.equals("DOWN") && totalBodies.get(i).getY() < headTurnLocation.peek()[1]) {
               totalBodies.get(i).setY(totalBodies.get(i).getY() + PreGameController.snake.getSpeed());
               break;
-            } else if (previousDirection.equals("UP") && totalBodies.get(i).getY() > headTurnLocation[1]) {
+            } else if (previousDirection.equals("UP") && totalBodies.get(i).getY() > headTurnLocation.peek()[1]) {
               totalBodies.get(i).setY(totalBodies.get(i).getY() - PreGameController.snake.getSpeed());
               break;
             }
+            headTurnLocation.poll();
             totalBodies.get(i).setX(snakeHead.getX() - bodyFactor - 50);
             totalBodies.get(i).setY(snakeHead.getY());
           }
           case "LEFT" -> {
-            if (previousDirection.equals("DOWN") && totalBodies.get(i).getY() < headTurnLocation[1]) {
+            if (previousDirection.equals("DOWN") && totalBodies.get(i).getY() < headTurnLocation.peek()[1]) {
               totalBodies.get(i).setY(totalBodies.get(i).getY() + PreGameController.snake.getSpeed());
               break;
-            } else if (previousDirection.equals("UP") && totalBodies.get(i).getY() > headTurnLocation[1]) {
+            } else if (previousDirection.equals("UP") && totalBodies.get(i).getY() > headTurnLocation.peek()[1]) {
               totalBodies.get(i).setY(totalBodies.get(i).getY() - PreGameController.snake.getSpeed());
               break;
             }
@@ -160,10 +167,10 @@ public class GameController {
             totalBodies.get(i).setY(snakeHead.getY());
           }
           case "DOWN" -> {
-            if (previousDirection.equals("RIGHT") && totalBodies.get(i).getX() < headTurnLocation[0]) {
+            if (previousDirection.equals("RIGHT") && totalBodies.get(i).getX() < headTurnLocation.peek()[0]) {
               totalBodies.get(i).setX(totalBodies.get(i).getX() + PreGameController.snake.getSpeed());
               break;
-            } else if (previousDirection.equals("LEFT") && totalBodies.get(i).getX() > headTurnLocation[0]) {
+            } else if (previousDirection.equals("LEFT") && totalBodies.get(i).getX() > headTurnLocation.peek()[0]) {
               totalBodies.get(i).setX(totalBodies.get(i).getX() - PreGameController.snake.getSpeed());
               break;
             }
@@ -171,10 +178,10 @@ public class GameController {
             totalBodies.get(i).setY(snakeHead.getY() - bodyFactor - 50);
           }
           case "UP" -> {
-            if (previousDirection.equals("RIGHT") && totalBodies.get(i).getX() < headTurnLocation[0]) {
+            if (previousDirection.equals("RIGHT") && totalBodies.get(i).getX() < headTurnLocation.peek()[0]) {
               totalBodies.get(i).setX(totalBodies.get(i).getX() + PreGameController.snake.getSpeed());
               break;
-            } else if (previousDirection.equals("LEFT") && totalBodies.get(i).getX() > headTurnLocation[0]) {
+            } else if (previousDirection.equals("LEFT") && totalBodies.get(i).getX() > headTurnLocation.peek()[0]) {
               totalBodies.get(i).setX(totalBodies.get(i).getX() - PreGameController.snake.getSpeed());
               break;
             }
@@ -259,5 +266,9 @@ public class GameController {
         translateTransition.play();
         fadeTransition.play();
 
+    }
+
+    public void initializeQueue() {
+      headTurnLocation.add(new double[] {200, 150});
     }
 }

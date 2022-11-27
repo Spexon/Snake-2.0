@@ -10,6 +10,7 @@
 
 <AnchorPane prefHeight="1080.0" prefWidth="1924.0" stylesheets="@MSStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="903.0" layoutX="99.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="1703.0" />
       <ImageView fx:id="snakeHead" fitHeight="50.0" fitWidth="50.0" focusTraversable="true" onKeyPressed="#handleDirectionChange" pickOnBounds="true" x="200.0" y="150.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="1111.0" layoutX="-8.0" layoutY="-8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="107.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a782e" height="106.0" layoutX="95.0" layoutY="-6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1830.0" />
